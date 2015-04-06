@@ -2,8 +2,8 @@ var Bootstrap = require('bootstrap-webpack-plugin')
 var path = require('path').join.bind(null, __dirname)
 
 
-
-var outputDir = path('build')
+var outputDirName = 'build'
+var outputDir = path(outputDirName)
 var indexEntry = ['./examples/basic/index.js', 'webpack/hot/dev-server']
 var jsLoaders = ['react-hot', 'babel']
 
@@ -13,6 +13,7 @@ module.exports = {
   },
   output: {
     path: outputDir,
+    publicPath: '/react-popover/' + outputDirName + '/',
     filename: '[name].js'
   },
   module: {
