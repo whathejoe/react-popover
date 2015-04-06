@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/react-popover/build/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -2235,17 +2235,17 @@
 	var ReactComponent = __webpack_require__(19);
 	var ReactCurrentOwner = __webpack_require__(22);
 	var ReactElement = __webpack_require__(23);
-	var ReactErrorUtils = __webpack_require__(48);
-	var ReactInstanceMap = __webpack_require__(49);
-	var ReactLifeCycle = __webpack_require__(50);
-	var ReactPropTypeLocations = __webpack_require__(51);
-	var ReactPropTypeLocationNames = __webpack_require__(52);
+	var ReactErrorUtils = __webpack_require__(49);
+	var ReactInstanceMap = __webpack_require__(50);
+	var ReactLifeCycle = __webpack_require__(51);
+	var ReactPropTypeLocations = __webpack_require__(52);
+	var ReactPropTypeLocationNames = __webpack_require__(53);
 	var ReactUpdateQueue = __webpack_require__(47);
 	
 	var assign = __webpack_require__(34);
 	var invariant = __webpack_require__(42);
-	var keyMirror = __webpack_require__(53);
-	var keyOf = __webpack_require__(54);
+	var keyMirror = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	var warning = __webpack_require__(46);
 	
 	var MIXINS_KEY = keyOf({mixins: null});
@@ -3182,7 +3182,7 @@
 	'use strict';
 	
 	var assign = __webpack_require__(34);
-	var emptyObject = __webpack_require__(55);
+	var emptyObject = __webpack_require__(48);
 	var warning = __webpack_require__(46);
 	
 	var didWarn = false;
@@ -3620,8 +3620,8 @@
 	
 	var ReactElement = __webpack_require__(23);
 	var ReactFragment = __webpack_require__(44);
-	var ReactPropTypeLocations = __webpack_require__(51);
-	var ReactPropTypeLocationNames = __webpack_require__(52);
+	var ReactPropTypeLocations = __webpack_require__(52);
+	var ReactPropTypeLocationNames = __webpack_require__(53);
 	var ReactCurrentOwner = __webpack_require__(22);
 	var ReactNativeComponent = __webpack_require__(56);
 	
@@ -4889,14 +4889,14 @@
 	var ReactElementValidator = __webpack_require__(24);
 	var ReactEmptyComponent = __webpack_require__(93);
 	var ReactInstanceHandles = __webpack_require__(28);
-	var ReactInstanceMap = __webpack_require__(49);
+	var ReactInstanceMap = __webpack_require__(50);
 	var ReactMarkupChecksum = __webpack_require__(94);
 	var ReactPerf = __webpack_require__(30);
 	var ReactReconciler = __webpack_require__(32);
 	var ReactUpdateQueue = __webpack_require__(47);
 	var ReactUpdates = __webpack_require__(95);
 	
-	var emptyObject = __webpack_require__(55);
+	var emptyObject = __webpack_require__(48);
 	var containsNode = __webpack_require__(96);
 	var getReactRootElementInContainer = __webpack_require__(97);
 	var instantiateReactComponent = __webpack_require__(98);
@@ -5885,7 +5885,7 @@
 	
 	var ReactElement = __webpack_require__(23);
 	var ReactFragment = __webpack_require__(44);
-	var ReactPropTypeLocationNames = __webpack_require__(52);
+	var ReactPropTypeLocationNames = __webpack_require__(53);
 	
 	var emptyFunction = __webpack_require__(16);
 	
@@ -6369,7 +6369,7 @@
 	var ReactServerRenderingTransaction =
 	  __webpack_require__(102);
 	
-	var emptyObject = __webpack_require__(55);
+	var emptyObject = __webpack_require__(48);
 	var instantiateReactComponent = __webpack_require__(98);
 	var invariant = __webpack_require__(42);
 	
@@ -6503,7 +6503,7 @@
 	'use strict';
 	
 	var ReactCurrentOwner = __webpack_require__(22);
-	var ReactInstanceMap = __webpack_require__(49);
+	var ReactInstanceMap = __webpack_require__(50);
 	var ReactMount = __webpack_require__(29);
 	
 	var invariant = __webpack_require__(42);
@@ -6668,7 +6668,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(104);
+	exports.humanize = __webpack_require__(112);
 	
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -6942,18 +6942,18 @@
 	
 	'use strict';
 	
-	var LinkedStateMixin = __webpack_require__(105);
+	var LinkedStateMixin = __webpack_require__(104);
 	var React = __webpack_require__(13);
 	var ReactComponentWithPureRenderMixin =
-	  __webpack_require__(106);
-	var ReactCSSTransitionGroup = __webpack_require__(107);
+	  __webpack_require__(105);
+	var ReactCSSTransitionGroup = __webpack_require__(106);
 	var ReactFragment = __webpack_require__(44);
-	var ReactTransitionGroup = __webpack_require__(108);
+	var ReactTransitionGroup = __webpack_require__(107);
 	var ReactUpdates = __webpack_require__(95);
 	
-	var cx = __webpack_require__(109);
-	var cloneWithProps = __webpack_require__(110);
-	var update = __webpack_require__(111);
+	var cx = __webpack_require__(108);
+	var cloneWithProps = __webpack_require__(109);
+	var update = __webpack_require__(110);
 	
 	React.addons = {
 	  CSSTransitionGroup: ReactCSSTransitionGroup,
@@ -6970,7 +6970,7 @@
 	
 	if ("production" !== process.env.NODE_ENV) {
 	  React.addons.Perf = __webpack_require__(89);
-	  React.addons.TestUtils = __webpack_require__(112);
+	  React.addons.TestUtils = __webpack_require__(111);
 	}
 	
 	module.exports = React;
@@ -6994,7 +6994,7 @@
 	
 	'use strict';
 	
-	var keyMirror = __webpack_require__(53);
+	var keyMirror = __webpack_require__(54);
 	
 	var PropagationPhases = keyMirror({bubbled: null, captured: null});
 	
@@ -7759,10 +7759,10 @@
 	
 	'use strict';
 	
-	var ReactLifeCycle = __webpack_require__(50);
+	var ReactLifeCycle = __webpack_require__(51);
 	var ReactCurrentOwner = __webpack_require__(22);
 	var ReactElement = __webpack_require__(23);
-	var ReactInstanceMap = __webpack_require__(49);
+	var ReactInstanceMap = __webpack_require__(50);
 	var ReactUpdates = __webpack_require__(95);
 	
 	var assign = __webpack_require__(34);
@@ -8048,6 +8048,33 @@
 /* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule emptyObject
+	 */
+	
+	"use strict";
+	
+	var emptyObject = {};
+	
+	if ("production" !== process.env.NODE_ENV) {
+	  Object.freeze(emptyObject);
+	}
+	
+	module.exports = emptyObject;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
 	 * All rights reserved.
@@ -8081,7 +8108,7 @@
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8134,7 +8161,7 @@
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8175,7 +8202,7 @@
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8191,7 +8218,7 @@
 	
 	'use strict';
 	
-	var keyMirror = __webpack_require__(53);
+	var keyMirror = __webpack_require__(54);
 	
 	var ReactPropTypeLocations = keyMirror({
 	  prop: null,
@@ -8203,7 +8230,7 @@
 
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -8234,7 +8261,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -8292,7 +8319,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -8330,33 +8357,6 @@
 	
 	module.exports = keyOf;
 
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule emptyObject
-	 */
-	
-	"use strict";
-	
-	var emptyObject = {};
-	
-	if ("production" !== process.env.NODE_ENV) {
-	  Object.freeze(emptyObject);
-	}
-	
-	module.exports = emptyObject;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
 /* 56 */
@@ -8853,7 +8853,7 @@
 	var escapeTextContentForBrowser = __webpack_require__(62);
 	var invariant = __webpack_require__(42);
 	var isEventSupported = __webpack_require__(116);
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	var warning = __webpack_require__(46);
 	
 	var deleteListener = ReactBrowserEventEmitter.deleteListener;
@@ -9397,7 +9397,7 @@
 	var SyntheticCompositionEvent = __webpack_require__(119);
 	var SyntheticInputEvent = __webpack_require__(120);
 	
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	
 	var END_KEYCODES = [9, 13, 27, 32]; // Tab, Return, Esc, Space
 	var START_KEYCODE = 229;
@@ -9897,7 +9897,7 @@
 	
 	var isEventSupported = __webpack_require__(116);
 	var isTextInputElement = __webpack_require__(123);
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	
 	var topLevelTypes = EventConstants.topLevelTypes;
 	
@@ -10303,7 +10303,7 @@
 	
 	'use strict';
 	
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	
 	/**
 	 * Module that is injectable into `EventPluginHub`, that specifies a
@@ -10352,7 +10352,7 @@
 	var SyntheticMouseEvent = __webpack_require__(124);
 	
 	var ReactMount = __webpack_require__(29);
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	
 	var topLevelTypes = EventConstants.topLevelTypes;
 	var getFirstReactDOM = ReactMount.getFirstReactDOM;
@@ -10878,7 +10878,7 @@
 	var ReactClass = __webpack_require__(20);
 	var ReactElement = __webpack_require__(23);
 	
-	var keyMirror = __webpack_require__(53);
+	var keyMirror = __webpack_require__(54);
 	
 	var button = ReactElement.createFactory('button');
 	
@@ -12244,7 +12244,7 @@
 	
 	var getActiveElement = __webpack_require__(137);
 	var isTextInputElement = __webpack_require__(123);
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	var shallowEqual = __webpack_require__(138);
 	
 	var topLevelTypes = EventConstants.topLevelTypes;
@@ -12487,7 +12487,7 @@
 	var getEventCharCode = __webpack_require__(146);
 	
 	var invariant = __webpack_require__(42);
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	var warning = __webpack_require__(46);
 	
 	var topLevelTypes = EventConstants.topLevelTypes;
@@ -14028,7 +14028,7 @@
 	'use strict';
 	
 	var ReactElement = __webpack_require__(23);
-	var ReactInstanceMap = __webpack_require__(49);
+	var ReactInstanceMap = __webpack_require__(50);
 	
 	var invariant = __webpack_require__(42);
 	
@@ -15100,135 +15100,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Helpers.
-	 */
-	
-	var s = 1000;
-	var m = s * 60;
-	var h = m * 60;
-	var d = h * 24;
-	var y = d * 365.25;
-	
-	/**
-	 * Parse or format the given `val`.
-	 *
-	 * Options:
-	 *
-	 *  - `long` verbose formatting [false]
-	 *
-	 * @param {String|Number} val
-	 * @param {Object} options
-	 * @return {String|Number}
-	 * @api public
-	 */
-	
-	module.exports = function(val, options){
-	  options = options || {};
-	  if ('string' == typeof val) return parse(val);
-	  return options.long
-	    ? long(val)
-	    : short(val);
-	};
-	
-	/**
-	 * Parse the given `str` and return milliseconds.
-	 *
-	 * @param {String} str
-	 * @return {Number}
-	 * @api private
-	 */
-	
-	function parse(str) {
-	  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str);
-	  if (!match) return;
-	  var n = parseFloat(match[1]);
-	  var type = (match[2] || 'ms').toLowerCase();
-	  switch (type) {
-	    case 'years':
-	    case 'year':
-	    case 'yrs':
-	    case 'yr':
-	    case 'y':
-	      return n * y;
-	    case 'days':
-	    case 'day':
-	    case 'd':
-	      return n * d;
-	    case 'hours':
-	    case 'hour':
-	    case 'hrs':
-	    case 'hr':
-	    case 'h':
-	      return n * h;
-	    case 'minutes':
-	    case 'minute':
-	    case 'mins':
-	    case 'min':
-	    case 'm':
-	      return n * m;
-	    case 'seconds':
-	    case 'second':
-	    case 'secs':
-	    case 'sec':
-	    case 's':
-	      return n * s;
-	    case 'milliseconds':
-	    case 'millisecond':
-	    case 'msecs':
-	    case 'msec':
-	    case 'ms':
-	      return n;
-	  }
-	}
-	
-	/**
-	 * Short format for `ms`.
-	 *
-	 * @param {Number} ms
-	 * @return {String}
-	 * @api private
-	 */
-	
-	function short(ms) {
-	  if (ms >= d) return Math.round(ms / d) + 'd';
-	  if (ms >= h) return Math.round(ms / h) + 'h';
-	  if (ms >= m) return Math.round(ms / m) + 'm';
-	  if (ms >= s) return Math.round(ms / s) + 's';
-	  return ms + 'ms';
-	}
-	
-	/**
-	 * Long format for `ms`.
-	 *
-	 * @param {Number} ms
-	 * @return {String}
-	 * @api private
-	 */
-	
-	function long(ms) {
-	  return plural(ms, d, 'day')
-	    || plural(ms, h, 'hour')
-	    || plural(ms, m, 'minute')
-	    || plural(ms, s, 'second')
-	    || ms + ' ms';
-	}
-	
-	/**
-	 * Pluralization helper.
-	 */
-	
-	function plural(ms, n, name) {
-	  if (ms < n) return;
-	  if (ms < n * 1.5) return Math.floor(ms / n) + ' ' + name;
-	  return Math.ceil(ms / n) + ' ' + name + 's';
-	}
-
-
-/***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
 	 * Copyright 2013-2015, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -15270,7 +15141,7 @@
 
 
 /***/ },
-/* 106 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15323,7 +15194,7 @@
 
 
 /***/ },
-/* 107 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15345,7 +15216,7 @@
 	var assign = __webpack_require__(34);
 	
 	var ReactTransitionGroup = React.createFactory(
-	  __webpack_require__(108)
+	  __webpack_require__(107)
 	);
 	var ReactCSSTransitionGroupChild = React.createFactory(
 	  __webpack_require__(158)
@@ -15397,7 +15268,7 @@
 
 
 /***/ },
-/* 108 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15417,7 +15288,7 @@
 	var ReactTransitionChildMapping = __webpack_require__(159);
 	
 	var assign = __webpack_require__(34);
-	var cloneWithProps = __webpack_require__(110);
+	var cloneWithProps = __webpack_require__(109);
 	var emptyFunction = __webpack_require__(16);
 	
 	var ReactTransitionGroup = React.createClass({
@@ -15631,7 +15502,7 @@
 
 
 /***/ },
-/* 109 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -15690,7 +15561,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 110 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -15710,7 +15581,7 @@
 	var ReactElement = __webpack_require__(23);
 	var ReactPropTransferer = __webpack_require__(160);
 	
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	var warning = __webpack_require__(46);
 	
 	var CHILDREN_PROP = keyOf({children: null});
@@ -15752,7 +15623,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 111 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -15769,7 +15640,7 @@
 	'use strict';
 	
 	var assign = __webpack_require__(34);
-	var keyOf = __webpack_require__(54);
+	var keyOf = __webpack_require__(55);
 	var invariant = __webpack_require__(42);
 	
 	function shallowCopy(x) {
@@ -15923,7 +15794,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 112 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15948,7 +15819,7 @@
 	var ReactBrowserEventEmitter = __webpack_require__(92);
 	var ReactCompositeComponent = __webpack_require__(154);
 	var ReactInstanceHandles = __webpack_require__(28);
-	var ReactInstanceMap = __webpack_require__(49);
+	var ReactInstanceMap = __webpack_require__(50);
 	var ReactMount = __webpack_require__(29);
 	var ReactUpdates = __webpack_require__(95);
 	var SyntheticEvent = __webpack_require__(122);
@@ -16434,6 +16305,135 @@
 	}
 	
 	module.exports = ReactTestUtils;
+
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Helpers.
+	 */
+	
+	var s = 1000;
+	var m = s * 60;
+	var h = m * 60;
+	var d = h * 24;
+	var y = d * 365.25;
+	
+	/**
+	 * Parse or format the given `val`.
+	 *
+	 * Options:
+	 *
+	 *  - `long` verbose formatting [false]
+	 *
+	 * @param {String|Number} val
+	 * @param {Object} options
+	 * @return {String|Number}
+	 * @api public
+	 */
+	
+	module.exports = function(val, options){
+	  options = options || {};
+	  if ('string' == typeof val) return parse(val);
+	  return options.long
+	    ? long(val)
+	    : short(val);
+	};
+	
+	/**
+	 * Parse the given `str` and return milliseconds.
+	 *
+	 * @param {String} str
+	 * @return {Number}
+	 * @api private
+	 */
+	
+	function parse(str) {
+	  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str);
+	  if (!match) return;
+	  var n = parseFloat(match[1]);
+	  var type = (match[2] || 'ms').toLowerCase();
+	  switch (type) {
+	    case 'years':
+	    case 'year':
+	    case 'yrs':
+	    case 'yr':
+	    case 'y':
+	      return n * y;
+	    case 'days':
+	    case 'day':
+	    case 'd':
+	      return n * d;
+	    case 'hours':
+	    case 'hour':
+	    case 'hrs':
+	    case 'hr':
+	    case 'h':
+	      return n * h;
+	    case 'minutes':
+	    case 'minute':
+	    case 'mins':
+	    case 'min':
+	    case 'm':
+	      return n * m;
+	    case 'seconds':
+	    case 'second':
+	    case 'secs':
+	    case 'sec':
+	    case 's':
+	      return n * s;
+	    case 'milliseconds':
+	    case 'millisecond':
+	    case 'msecs':
+	    case 'msec':
+	    case 'ms':
+	      return n;
+	  }
+	}
+	
+	/**
+	 * Short format for `ms`.
+	 *
+	 * @param {Number} ms
+	 * @return {String}
+	 * @api private
+	 */
+	
+	function short(ms) {
+	  if (ms >= d) return Math.round(ms / d) + 'd';
+	  if (ms >= h) return Math.round(ms / h) + 'h';
+	  if (ms >= m) return Math.round(ms / m) + 'm';
+	  if (ms >= s) return Math.round(ms / s) + 's';
+	  return ms + 'ms';
+	}
+	
+	/**
+	 * Long format for `ms`.
+	 *
+	 * @param {Number} ms
+	 * @return {String}
+	 * @api private
+	 */
+	
+	function long(ms) {
+	  return plural(ms, d, 'day')
+	    || plural(ms, h, 'hour')
+	    || plural(ms, m, 'minute')
+	    || plural(ms, s, 'second')
+	    || ms + ' ms';
+	}
+	
+	/**
+	 * Pluralization helper.
+	 */
+	
+	function plural(ms, n, name) {
+	  if (ms < n) return;
+	  if (ms < n * 1.5) return Math.floor(ms / n) + ' ' + name;
+	  return Math.ceil(ms / n) + ' ' + name + 's';
+	}
 
 
 /***/ },
@@ -20498,17 +20498,17 @@
 	var ReactCurrentOwner = __webpack_require__(22);
 	var ReactElement = __webpack_require__(23);
 	var ReactElementValidator = __webpack_require__(24);
-	var ReactInstanceMap = __webpack_require__(49);
-	var ReactLifeCycle = __webpack_require__(50);
+	var ReactInstanceMap = __webpack_require__(50);
+	var ReactLifeCycle = __webpack_require__(51);
 	var ReactNativeComponent = __webpack_require__(56);
 	var ReactPerf = __webpack_require__(30);
-	var ReactPropTypeLocations = __webpack_require__(51);
-	var ReactPropTypeLocationNames = __webpack_require__(52);
+	var ReactPropTypeLocations = __webpack_require__(52);
+	var ReactPropTypeLocationNames = __webpack_require__(53);
 	var ReactReconciler = __webpack_require__(32);
 	var ReactUpdates = __webpack_require__(95);
 	
 	var assign = __webpack_require__(34);
-	var emptyObject = __webpack_require__(55);
+	var emptyObject = __webpack_require__(48);
 	var invariant = __webpack_require__(42);
 	var shouldUpdateReactComponent = __webpack_require__(100);
 	var warning = __webpack_require__(46);
@@ -22188,7 +22188,7 @@
 	
 	"use strict";
 	
-	var camelize = __webpack_require__(186);
+	var camelize = __webpack_require__(181);
 	
 	var msPattern = /^-ms-/;
 	
@@ -22296,7 +22296,7 @@
 	
 	"use strict";
 	
-	var hyphenate = __webpack_require__(181);
+	var hyphenate = __webpack_require__(182);
 	
 	var msPattern = /^ms-/;
 	
@@ -22377,7 +22377,7 @@
 	
 	'use strict';
 	
-	var keyMirror = __webpack_require__(53);
+	var keyMirror = __webpack_require__(54);
 	
 	/**
 	 * When a component's children are updated, a series of update configuration
@@ -22417,7 +22417,7 @@
 	
 	var ReactReconciler = __webpack_require__(32);
 	
-	var flattenChildren = __webpack_require__(182);
+	var flattenChildren = __webpack_require__(183);
 	var instantiateReactComponent = __webpack_require__(98);
 	var shouldUpdateReactComponent = __webpack_require__(100);
 	
@@ -22779,9 +22779,9 @@
 	
 	var ExecutionEnvironment = __webpack_require__(37);
 	
-	var createNodesFromMarkup = __webpack_require__(183);
+	var createNodesFromMarkup = __webpack_require__(184);
 	var emptyFunction = __webpack_require__(16);
-	var getMarkupWrap = __webpack_require__(184);
+	var getMarkupWrap = __webpack_require__(185);
 	var invariant = __webpack_require__(42);
 	
 	var OPEN_TAG_NAME_EXP = /^(<[^ \/>]+)/;
@@ -23012,7 +23012,7 @@
 	
 	var ExecutionEnvironment = __webpack_require__(37);
 	
-	var getNodeForCharacterOffset = __webpack_require__(185);
+	var getNodeForCharacterOffset = __webpack_require__(186);
 	var getTextContentAccessor = __webpack_require__(170);
 	
 	/**
@@ -23638,6 +23638,42 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
+	 * @providesModule camelize
+	 * @typechecks
+	 */
+	
+	var _hyphenPattern = /-(.)/g;
+	
+	/**
+	 * Camelcases a hyphenated string, for example:
+	 *
+	 *   > camelize('background-color')
+	 *   < "backgroundColor"
+	 *
+	 * @param {string} string
+	 * @return {string}
+	 */
+	function camelize(string) {
+	  return string.replace(_hyphenPattern, function(_, character) {
+	    return character.toUpperCase();
+	  });
+	}
+	
+	module.exports = camelize;
+
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
 	 * @providesModule hyphenate
 	 * @typechecks
 	 */
@@ -23664,7 +23700,7 @@
 
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -23725,7 +23761,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -23745,7 +23781,7 @@
 	var ExecutionEnvironment = __webpack_require__(37);
 	
 	var createArrayFromMixed = __webpack_require__(187);
-	var getMarkupWrap = __webpack_require__(184);
+	var getMarkupWrap = __webpack_require__(185);
 	var invariant = __webpack_require__(42);
 	
 	/**
@@ -23818,7 +23854,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -23938,7 +23974,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24014,42 +24050,6 @@
 	}
 	
 	module.exports = getNodeForCharacterOffset;
-
-
-/***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule camelize
-	 * @typechecks
-	 */
-	
-	var _hyphenPattern = /-(.)/g;
-	
-	/**
-	 * Camelcases a hyphenated string, for example:
-	 *
-	 *   > camelize('background-color')
-	 *   < "backgroundColor"
-	 *
-	 * @param {string} string
-	 * @return {string}
-	 */
-	function camelize(string) {
-	  return string.replace(_hyphenPattern, function(_, character) {
-	    return character.toUpperCase();
-	  });
-	}
-	
-	module.exports = camelize;
 
 
 /***/ },
