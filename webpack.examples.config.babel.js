@@ -25,8 +25,5 @@ export default {
     ]
   },
   devtool: 'source-map',
-  devServer: {
-    contentBase: outputDir
-  },
   plugins: [Bootstrap({})]
 }
