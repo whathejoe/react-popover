@@ -87,11 +87,13 @@
 	
 	var Layout = _interopRequireWildcard(_libLayout);
 	
-	_react2['default'].initializeTouchEvents(true);
 	var debug = (0, _debug2['default'])('demo');
 	var Popover = _react2['default'].createFactory(_lib2['default']);
 	var Tappable = _react2['default'].createFactory(_reactTappable2['default']);
 	var Draggable = _react2['default'].createFactory(_reactDraggable2['default']);
+	
+	_react2['default'].initializeTouchEvents(true);
+	_debug2['default'].enable('react-popover,demo');
 	
 	var createOption = function createOption(type) {
 	  return _react.DOM.option({
@@ -29678,7 +29680,56 @@
 	var _cssVendor2 = _interopRequireDefault(_cssVendor);
 	
 	var assign = (0, _objectAssignPolyfill2['default'])();
+	var arrayify = function arrayify(x) {
+	  return Array.isArray(x) ? x : [x];
+	};
 	var log = (0, _debug2['default'])('react-popover');
+	
+	/* React 12<= / >=13 compatible findDOMNode function. */
+	
+	var supportsFindDOMNode = Number(_react2['default'].version.split('.')[1]) >= 13;
+	
+	var findDOMNode = function findDOMNode(component) {
+	  return supportsFindDOMNode ? _react2['default'].findDOMNode(component) : component.getDOMNode();
+	};
+	
+	var ReactLayerMixin = function ReactLayerMixin() {
+	  return {
+	    componentWillMount: function componentWillMount() {
+	      this.targetBounds = null;
+	      /* Create a DOM node for mounting the React Layer. */
+	      this.layerContainerNode = document.createElement('div');
+	    },
+	    componentDidMount: function componentDidMount() {
+	      /* Mount the mount. */
+	      document.body.appendChild(this.layerContainerNode);
+	      this._layerRender();
+	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	      this._layerRender();
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	      this._layerUnrender();
+	      /* Unmount the mount. */
+	      document.body.removeChild(this.layerContainerNode);
+	    },
+	    _layerRender: function _layerRender() {
+	      var layerReactEl = this.renderLayer();
+	      if (!layerReactEl) {
+	        this.layerReactComponent = null;
+	        (0, _react.render)(_react.DOM.noscript(), this.layerContainerNode);
+	      } else {
+	        this.layerReactComponent = (0, _react.render)(layerReactEl, this.layerContainerNode);
+	      }
+	    },
+	    _layerUnrender: function _layerUnrender() {
+	      if (this.layerWillUnmount) this.layerWillUnmount(this.layerContainerNode);
+	      (0, _react.unmountComponentAtNode)(this.layerContainerNode);
+	    }
+	    // Must be implemented by consuming component:
+	    // renderLayer() {}
+	  };
+	};
 	
 	var jsprefix = function jsprefix(x) {
 	  return '' + _cssVendor2['default'].prefix.js + x;
@@ -29716,7 +29767,32 @@
 	  column: 'translateY'
 	};
 	
-	exports['default'] = (0, _react.createClass)({
+	var PopoverTip = (0, _react.createClass)({
+	  name: 'tip',
+	  render: function render() {
+	    var direction = this.props.direction;
+	
+	    var size = this.props.size || 24;
+	    var isPortrait = direction === 'up' || direction === 'down';
+	    var mainLength = size;
+	    var crossLength = size * 2;
+	    var points = direction === 'up' ? '0,' + mainLength + ' ' + mainLength + ',0, ' + crossLength + ',' + mainLength : direction === 'down' ? '0,0 ' + mainLength + ',' + mainLength + ', ' + crossLength + ',0' : direction === 'left' ? mainLength + ',0 0,' + mainLength + ', ' + mainLength + ',' + crossLength : '0,0 ' + mainLength + ',' + mainLength + ', 0,' + crossLength;
+	    var props = {
+	      className: 'Popover-tip',
+	      width: isPortrait ? crossLength : mainLength,
+	      height: isPortrait ? mainLength : crossLength
+	    };
+	
+	    var triangle = _react.DOM.svg(props, _react.DOM.polygon({
+	      className: 'Popover-tipShape',
+	      points: points
+	    }));
+	
+	    return triangle;
+	  }
+	});
+	
+	var Popover = (0, _react.createClass)({
 	  name: 'popover',
 	  mixins: [ReactLayerMixin()],
 	  propTypes: {
@@ -30111,80 +30187,7 @@
 	  }
 	});
 	
-	var arrayify = function arrayify(x) {
-	  return Array.isArray(x) ? x : [x];
-	};
-	
-	var PopoverTip = (0, _react.createClass)({
-	  name: 'tip',
-	  render: function render() {
-	    var direction = this.props.direction;
-	
-	    var size = this.props.size || 24;
-	    var isPortrait = direction === 'up' || direction === 'down';
-	    var mainLength = size;
-	    var crossLength = size * 2;
-	    var points = direction === 'up' ? '0,' + mainLength + ' ' + mainLength + ',0, ' + crossLength + ',' + mainLength : direction === 'down' ? '0,0 ' + mainLength + ',' + mainLength + ', ' + crossLength + ',0' : direction === 'left' ? mainLength + ',0 0,' + mainLength + ', ' + mainLength + ',' + crossLength : '0,0 ' + mainLength + ',' + mainLength + ', 0,' + crossLength;
-	    var props = {
-	      className: 'Popover-tip',
-	      width: isPortrait ? crossLength : mainLength,
-	      height: isPortrait ? mainLength : crossLength
-	    };
-	
-	    var triangle = _react.DOM.svg(props, _react.DOM.polygon({
-	      className: 'Popover-tipShape',
-	      points: points
-	    }));
-	
-	    return triangle;
-	  }
-	});
-	
-	function ReactLayerMixin() {
-	  return {
-	    componentWillMount: function componentWillMount() {
-	      this.targetBounds = null;
-	      /* Create a DOM node for mounting the React Layer. */
-	      this.layerContainerNode = document.createElement('div');
-	    },
-	    componentDidMount: function componentDidMount() {
-	      /* Mount the mount. */
-	      document.body.appendChild(this.layerContainerNode);
-	      this._layerRender();
-	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	      this._layerRender();
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	      this._layerUnrender();
-	      /* Unmount the mount. */
-	      document.body.removeChild(this.layerContainerNode);
-	    },
-	    _layerRender: function _layerRender() {
-	      var layerReactEl = this.renderLayer();
-	      if (!layerReactEl) {
-	        this.layerReactComponent = null;
-	        (0, _react.render)(_react.DOM.noscript(), this.layerContainerNode);
-	      } else {
-	        this.layerReactComponent = (0, _react.render)(layerReactEl, this.layerContainerNode);
-	      }
-	    },
-	    _layerUnrender: function _layerUnrender() {
-	      if (this.layerWillUnmount) this.layerWillUnmount(this.layerContainerNode);
-	      (0, _react.unmountComponentAtNode)(this.layerContainerNode);
-	    }
-	    // Must be implemented by consuming component:
-	    // renderLayer() {}
-	  };
-	}
-	
-	/* React 12<= / >=13 compatible findDOMNode function. */
-	
-	var supportsFindDOMNode = Number(_react2['default'].version.split('.')[1]) >= 13 ? true : false;
-	
-	function findDOMNode(component) {
-	  return supportsFindDOMNode ? _react2['default'].findDOMNode(component) : component.getDOMNode();
-	}
+	exports['default'] = Popover;
 	module.exports = exports['default'];
 
 /***/ },
@@ -30611,8 +30614,8 @@
 /***/ function(module, exports) {
 
 	/* Axes system. This allows us to at-will work in a different orientation
-	 without having to manually keep track of knowing if we should be using
-	 x or y positions. */
+	without having to manually keep track of knowing if we should be using
+	x or y positions. */
 	
 	'use strict';
 	
@@ -30646,6 +30649,28 @@
 	  var values = _ref2.values;
 	  return xs.concat(values);
 	}, []);
+	
+	var centerOfSize = function centerOfSize(flow, axis, size) {
+	  return size[axes[flow][axis].size] / 2;
+	};
+	
+	var centerOfBounds = function centerOfBounds(flow, axis, bounds) {
+	  var props = axes[flow][axis];
+	  return bounds[props.start] + bounds[props.size] / 2;
+	};
+	
+	var centerOfBoundsFromBounds = function centerOfBoundsFromBounds(flow, axis, boundsTo, boundsFrom) {
+	  return centerOfBounds(flow, axis, boundsTo) - boundsFrom[axes[flow][axis].start];
+	};
+	
+	var place = function place(flow, axis, align, bounds, size) {
+	  var axisProps = axes[flow][axis];
+	  return align === 'center' ? centerOfBounds(flow, axis, bounds) - centerOfSize(flow, axis, size) : align === 'end' ? bounds[axisProps.end] : align === 'start'
+	  /* DOM rendering unfolds leftward. Therefore if the slave is positioned before
+	  the master then the slave's position must in addition be pulled back
+	  by its [the slave's] own length. */
+	  ? bounds[axisProps.start] - size[axisProps.size] : null;
+	};
 	
 	var fitWithinChecker = function fitWithinChecker(dimension) {
 	  return function (domainSize, itemSize) {
@@ -30751,28 +30776,6 @@
 	  var crossSize = slaveSize[cross.size];
 	
 	  return (_ref = {}, _defineProperty(_ref, main.start, mainStart), _defineProperty(_ref, 'mainLength', mainSize), _defineProperty(_ref, main.end, mainStart + mainSize), _defineProperty(_ref, cross.start, crossStart), _defineProperty(_ref, 'crossLength', crossSize), _defineProperty(_ref, cross.end, crossStart + crossSize), _ref);
-	};
-	
-	var place = function place(flow, axis, align, bounds, size) {
-	  var axisProps = axes[flow][axis];
-	  return align === 'center' ? centerOfBounds(flow, axis, bounds) - centerOfSize(flow, axis, size) : align === 'end' ? bounds[axisProps.end] : align === 'start'
-	  /* DOM rendering unfolds leftward. Therefore if the slave is positioned before
-	  the master then the slave's position must in addition be pulled back
-	  by its [the slave's] own length. */
-	  ? bounds[axisProps.start] - size[axisProps.size] : null;
-	};
-	
-	var centerOfBounds = function centerOfBounds(flow, axis, bounds) {
-	  var props = axes[flow][axis];
-	  return bounds[props.start] + bounds[props.size] / 2;
-	};
-	
-	var centerOfBoundsFromBounds = function centerOfBoundsFromBounds(flow, axis, boundsTo, boundsFrom) {
-	  return centerOfBounds(flow, axis, boundsTo) - boundsFrom[axes[flow][axis].start];
-	};
-	
-	var centerOfSize = function centerOfSize(flow, axis, size) {
-	  return size[axes[flow][axis].size] / 2;
 	};
 	
 	/* Element-based layout functions */
