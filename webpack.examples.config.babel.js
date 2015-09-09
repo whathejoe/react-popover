@@ -6,8 +6,8 @@ import Path from 'path'
 let path = Path.join.bind(null, __dirname)
 var outputDirName = 'build'
 let outputDir = path(outputDirName)
-let indexEntry = [ './examples/basic/index.js', 'webpack/hot/dev-server' ]
-let jsLoaders = [ 'react-hot', 'babel' ]
+let indexEntry = ['./examples/basic/index.js']
+let jsLoaders = ['babel']
 
 export default {
   entry: {
