@@ -79,11 +79,11 @@
 	
 	var _lib2 = _interopRequireDefault(_lib);
 	
-	var _reactTappable = __webpack_require__(187);
+	var _reactTappable = __webpack_require__(191);
 	
 	var _reactTappable2 = _interopRequireDefault(_reactTappable);
 	
-	var _libLayout = __webpack_require__(178);
+	var _libLayout = __webpack_require__(180);
 	
 	var Layout = _interopRequireWildcard(_libLayout);
 	
@@ -29653,92 +29653,52 @@
 	
 	var _react = __webpack_require__(10);
 	
-	var _react2 = _interopRequireDefault(_react);
-	
 	var _debug = __webpack_require__(6);
 	
 	var _debug2 = _interopRequireDefault(_debug);
 	
-	var _objectAssignPolyfill = __webpack_require__(171);
-	
-	var _objectAssignPolyfill2 = _interopRequireDefault(_objectAssignPolyfill);
-	
-	var _onResize = __webpack_require__(177);
+	var _onResize = __webpack_require__(171);
 	
 	var resizeEvent = _interopRequireWildcard(_onResize);
 	
-	var _layout = __webpack_require__(178);
+	var _layout = __webpack_require__(180);
 	
 	var Layout = _interopRequireWildcard(_layout);
 	
-	var _lodashThrottle = __webpack_require__(179);
+	var _lodashThrottle = __webpack_require__(181);
 	
 	var _lodashThrottle2 = _interopRequireDefault(_lodashThrottle);
 	
-	var _cssVendor = __webpack_require__(182);
+	var _cssVendor = __webpack_require__(184);
 	
 	var _cssVendor2 = _interopRequireDefault(_cssVendor);
 	
-	var assign = (0, _objectAssignPolyfill2['default'])();
-	var arrayify = function arrayify(x) {
-	  return Array.isArray(x) ? x : [x];
-	};
+	var _platform = __webpack_require__(172);
+	
+	var _reactLayerMixin = __webpack_require__(189);
+	
+	var _reactLayerMixin2 = _interopRequireDefault(_reactLayerMixin);
+	
+	var _utils = __webpack_require__(173);
+	
+	var _popoverTip = __webpack_require__(190);
+	
+	var _popoverTip2 = _interopRequireDefault(_popoverTip);
+	
 	var log = (0, _debug2['default'])('react-popover');
 	
-	/* React 12<= / >=13 compatible findDOMNode function. */
-	
-	var supportsFindDOMNode = Number(_react2['default'].version.split('.')[1]) >= 13;
-	
-	var findDOMNode = function findDOMNode(component) {
-	  return supportsFindDOMNode ? _react2['default'].findDOMNode(component) : component.getDOMNode();
-	};
-	
-	var ReactLayerMixin = function ReactLayerMixin() {
-	  return {
-	    componentWillMount: function componentWillMount() {
-	      this.targetBounds = null;
-	      /* Create a DOM node for mounting the React Layer. */
-	      this.layerContainerNode = document.createElement('div');
-	    },
-	    componentDidMount: function componentDidMount() {
-	      /* Mount the mount. */
-	      document.body.appendChild(this.layerContainerNode);
-	      this._layerRender();
-	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	      this._layerRender();
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	      this._layerUnrender();
-	      /* Unmount the mount. */
-	      document.body.removeChild(this.layerContainerNode);
-	    },
-	    _layerRender: function _layerRender() {
-	      var layerReactEl = this.renderLayer();
-	      if (!layerReactEl) {
-	        this.layerReactComponent = null;
-	        (0, _react.render)(_react.DOM.noscript(), this.layerContainerNode);
-	      } else {
-	        this.layerReactComponent = (0, _react.render)(layerReactEl, this.layerContainerNode);
-	      }
-	    },
-	    _layerUnrender: function _layerUnrender() {
-	      if (this.layerWillUnmount) this.layerWillUnmount(this.layerContainerNode);
-	      (0, _react.unmountComponentAtNode)(this.layerContainerNode);
-	    }
-	    // Must be implemented by consuming component:
-	    // renderLayer() {}
-	  };
-	};
+	var supportedCSSValue = (0, _utils.clientOnly)(_cssVendor2['default'].supportedValue);
 	
 	var jsprefix = function jsprefix(x) {
 	  return '' + _cssVendor2['default'].prefix.js + x;
 	};
+	
 	var cssprefix = function cssprefix(x) {
 	  return '' + _cssVendor2['default'].prefix.css + x;
 	};
+	
 	var cssvalue = function cssvalue(prop, value) {
-	  return _cssVendor2['default'].supportedValue(prop, value) || cssprefix(value);
+	  return supportedCSSValue(prop, value) || cssprefix(value);
 	};
 	
 	var coreStyle = {
@@ -29767,34 +29727,9 @@
 	  column: 'translateY'
 	};
 	
-	var PopoverTip = (0, _react.createClass)({
-	  name: 'tip',
-	  render: function render() {
-	    var direction = this.props.direction;
-	
-	    var size = this.props.size || 24;
-	    var isPortrait = direction === 'up' || direction === 'down';
-	    var mainLength = size;
-	    var crossLength = size * 2;
-	    var points = direction === 'up' ? '0,' + mainLength + ' ' + mainLength + ',0, ' + crossLength + ',' + mainLength : direction === 'down' ? '0,0 ' + mainLength + ',' + mainLength + ', ' + crossLength + ',0' : direction === 'left' ? mainLength + ',0 0,' + mainLength + ', ' + mainLength + ',' + crossLength : '0,0 ' + mainLength + ',' + mainLength + ', 0,' + crossLength;
-	    var props = {
-	      className: 'Popover-tip',
-	      width: isPortrait ? crossLength : mainLength,
-	      height: isPortrait ? mainLength : crossLength
-	    };
-	
-	    var triangle = _react.DOM.svg(props, _react.DOM.polygon({
-	      className: 'Popover-tipShape',
-	      points: points
-	    }));
-	
-	    return triangle;
-	  }
-	});
-	
 	var Popover = (0, _react.createClass)({
-	  name: 'popover',
-	  mixins: [ReactLayerMixin()],
+	  displayName: 'popover',
+	  mixins: [(0, _reactLayerMixin2['default'])()],
 	  propTypes: {
 	    body: _react.PropTypes.node.isRequired,
 	    children: _react.PropTypes.element.isRequired,
@@ -29811,9 +29746,9 @@
 	      standing: 'above',
 	      exited: !this.props.isOpen, // for animation-dependent rendering, should popover close/open?
 	      exiting: false, // for tracking in-progress animations
-	      toggle: false // for business logic tracking, should popover close/open?
-	    };
+	      toggle: false };
 	  },
+	  // for business logic tracking, should popover close/open?
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      tipSize: 7,
@@ -29921,7 +29856,7 @@
 	        }
 	
 	    /* So far the link position has been calculated relative to the target. To calculate the absolute
-	    position we need to factor the `Frame`'s scroll position */
+	    position we need to factor the `Frame``s scroll position */
 	
 	    pos[axis.cross.start] += scrollSize.cross;
 	    pos[axis.main.start] += scrollSize.main;
@@ -29971,17 +29906,19 @@
 	  measureTargetBounds: function measureTargetBounds() {
 	    var newTargetBounds = Layout.El.calcBounds(this.targetEl);
 	
-	    if (this.targetBounds && Layout.equalCoords(this.targetBounds, newTargetBounds)) return false;
+	    if (this.targetBounds && Layout.equalCoords(this.targetBounds, newTargetBounds)) {
+	      return false;
+	    }
 	
 	    this.targetBounds = newTargetBounds;
 	    return true;
 	  },
 	  componentDidMount: function componentDidMount() {
-	    this.targetEl = findDOMNode(this);
+	    this.targetEl = (0, _utils.findDOMNode)(this);
 	    if (this.props.isOpen) this.enter();
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(propsNext) {
-	    //log('Component received props!', propsNext)
+	    //log(`Component received props!`, propsNext)
 	    var willOpen = !this.props.isOpen && propsNext.isOpen;
 	    var willClose = this.props.isOpen && !propsNext.isOpen;
 	
@@ -30000,13 +29937,14 @@
 	    this.setState({ toggle: false });
 	  },
 	  componentDidUpdate: function componentDidUpdate(propsPrev, statePrev) {
-	    //log('Component did update!')
+	    //log(`Component did update!`)
 	    var didOpen = !statePrev.toggle && this.state.toggle;
 	    var didClose = statePrev.toggle && !this.state.toggle;
 	
 	    if (didOpen) this.enter();else if (didClose) this.exit();
 	  },
 	  enter: function enter() {
+	    if (_platform.isServer) return;
 	    log('enter!');
 	    this.trackPopover();
 	    this.animateEnter();
@@ -30070,15 +30008,15 @@
 	
 	    /* Get references to DOM elements. */
 	
-	    this.containerEl = findDOMNode(this.layerReactComponent);
+	    this.containerEl = (0, _utils.findDOMNode)(this.layerReactComponent);
 	    this.bodyEl = this.containerEl.querySelector('.Popover-body');
 	    this.tipEl = this.containerEl.querySelector('.Popover-tip');
 	
 	    /* Note: frame is hardcoded to window now but we think it will
 	    be a nice feature in the future to allow other frames to be used
-	    such as local elements that further constrain the popover's world. */
+	    such as local elements that further constrain the popover`s world. */
 	
-	    this.frameEl = window;
+	    this.frameEl = _platform.window;
 	
 	    /* Set a general interval for checking if target position changed. There is no way
 	    to know this information without polling. */
@@ -30105,8 +30043,8 @@
 	    /* Track user actions on the page. Anything that occurs _outside_ the Popover boundaries
 	    should close the Popover. */
 	
-	    window.addEventListener('mousedown', this.checkForOuterAction);
-	    window.addEventListener('touchstart', this.checkForOuterAction);
+	    _platform.window.addEventListener('mousedown', this.checkForOuterAction);
+	    _platform.window.addEventListener('touchstart', this.checkForOuterAction);
 	
 	    /* Kickstart layout at first boot. */
 	
@@ -30125,8 +30063,8 @@
 	    resizeEvent.off(this.frameEl, this.onFrameResize);
 	    resizeEvent.off(this.containerEl, this.onPopoverResize);
 	    resizeEvent.off(this.targetEl, this.onTargetResize);
-	    window.removeEventListener('mousedown', this.checkForOuterAction);
-	    window.removeEventListener('touchstart', this.checkForOuterAction);
+	    _platform.window.removeEventListener('mousedown', this.checkForOuterAction);
+	    _platform.window.removeEventListener('touchstart', this.checkForOuterAction);
 	  },
 	  onTargetResize: function onTargetResize() {
 	    log('Recalculating layout because _target_ resized!');
@@ -30165,7 +30103,7 @@
 	
 	    var popoverProps = {
 	      className: 'Popover ' + className,
-	      style: assign({}, coreStyle, style)
+	      style: (0, _utils.assign)({}, coreStyle, style)
 	    };
 	
 	    var tipProps = {
@@ -30178,9 +30116,9 @@
 	    should be able to give an array of elements applied as if they were just normal
 	    children of the body component (note solution is to spread array items as args). */
 	
-	    var popoverBody = arrayify(this.props.body);
+	    var popoverBody = (0, _utils.arrayify)(this.props.body);
 	
-	    return _react.DOM.div(popoverProps, _react.DOM.div.apply(_react.DOM, [{ className: 'Popover-body' }].concat(_toConsumableArray(popoverBody))), (0, _react.createElement)(PopoverTip, tipProps));
+	    return _react.DOM.div(popoverProps, _react.DOM.div.apply(_react.DOM, [{ className: 'Popover-body' }].concat(_toConsumableArray(popoverBody))), (0, _react.createElement)(_popoverTip2['default'], tipProps));
 	  },
 	  render: function render() {
 	    return this.props.children;
@@ -30194,9 +30132,209 @@
 /* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* eslint no-param-reassign: 0 */
+	
 	'use strict';
 	
-	var implementation = __webpack_require__(172);
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _platform = __webpack_require__(172);
+	
+	var _utils = __webpack_require__(173);
+	
+	var requestAnimationFrame = _platform.isServer ? _utils.noop : _platform.window.requestAnimationFrame || _platform.window.mozRequestAnimationFrame || _platform.window.webkitRequestAnimationFrame || function (fn) {
+	  _platform.window.setTimeout(fn, 20);
+	};
+	
+	var cancelAnimationFrame = _platform.isServer ? _utils.noop : _platform.window.cancelAnimationFrame || _platform.window.mozCancelAnimationFrame || _platform.window.webkitCancelAnimationFrame || _platform.window.clearTimeout;
+	
+	var isIE = _platform.isServer ? false : navigator.userAgent.match(/Trident/);
+	
+	var namespace = '__resizeDetector__';
+	
+	var uninitialize = function uninitialize(el) {
+	  el[namespace].destroy();
+	  el[namespace] = undefined;
+	};
+	
+	var createElementHack = function createElementHack() {
+	  var el = document.createElement('object');
+	  el.className = 'resize-sensor';
+	  el.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
+	  el.setAttribute('class', 'resize-sensor');
+	  el.type = 'text/html';
+	  el.data = 'about:blank';
+	  return el;
+	};
+	
+	var initialize = function initialize(el) {
+	
+	  var detector = el[namespace] = {};
+	  detector.listeners = [];
+	
+	  var onResize = function onResize(e) {
+	    /* Keep in mind e.target could be el OR objEl. In this current implementation we don't seem to need to know this but its important
+	    to not forget e.g. in some future refactoring scenario. */
+	    if (detector.resizeRAF) cancelAnimationFrame(detector.resizeRAF);
+	    detector.resizeRAF = requestAnimationFrame(function () {
+	      detector.listeners.forEach(function (fn) {
+	        fn(e);
+	      });
+	    });
+	  };
+	
+	  if (isIE) {
+	    /* We do not support ie8 and below (or ie9 in compat mode).
+	    Therefore there is no presence of `attachEvent` here. */
+	    el.addEventListener('onresize', onResize);
+	    detector.destroy = function () {
+	      el.removeEventListener('onresize', onResize);
+	    };
+	  } else {
+	    (function () {
+	      if (getComputedStyle(el).position === 'static') {
+	        detector.elWasStaticPosition = true;
+	        el.style.position = 'relative';
+	      }
+	      var objEl = createElementHack();
+	      objEl.onload = function () /* event */{
+	        this.contentDocument.defaultView.addEventListener('resize', onResize);
+	      };
+	      detector.destroy = function () {
+	        if (detector.elWasStaticPosition) el.style.position = '';
+	        // Event handlers will be automatically removed.
+	        // http://stackoverflow.com/questions/12528049/if-a-dom-element-is-removed-are-its-listeners-also-removed-from-memory
+	        el.removeChild(objEl);
+	      };
+	
+	      el.appendChild(objEl);
+	    })();
+	  }
+	};
+	
+	var on = function on(el, fn) {
+	
+	  /* Window object natively publishes resize events. We handle it as a
+	  special case here so that users do not have to think about two APIs. */
+	
+	  if (el === _platform.window) {
+	    _platform.window.addEventListener('resize', fn);
+	    return;
+	  }
+	
+	  /* Not caching namespace read here beacuse not guaranteed that its available. */
+	
+	  if (!el[namespace]) initialize(el);
+	  el[namespace].listeners.push(fn);
+	};
+	
+	var off = function off(el, fn) {
+	  if (el === _platform.window) {
+	    _platform.window.removeEventListener('resize', fn);
+	    return;
+	  }
+	  var detector = el[namespace];
+	  if (!detector) return;
+	  var i = detector.listeners.indexOf(fn);
+	  if (i !== -1) detector.listeners.splice(i, 1);
+	  if (!detector.listeners.length) uninitialize(el);
+	};
+	
+	exports.on = on;
+	exports.off = off;
+	exports.addEventListener = on;
+	exports.removeEventListener = off;
+
+/***/ },
+/* 172 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var isServer = typeof window === "undefined";
+	var isClient = !isServer;
+	var WINDOW = isClient ? window : null;
+	
+	exports.isServer = isServer;
+	exports.isClient = isClient;
+	exports.window = WINDOW;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(10);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _objectAssignPolyfill = __webpack_require__(174);
+	
+	var _objectAssignPolyfill2 = _interopRequireDefault(_objectAssignPolyfill);
+	
+	var _platform = __webpack_require__(172);
+	
+	var assign = (0, _objectAssignPolyfill2['default'])();
+	
+	var arrayify = function arrayify(x) {
+	  return Array.isArray(x) ? x : [x];
+	};
+	
+	var find = function find(f, xs) {
+	  return xs.reduce(function (b, x) {
+	    return b ? b : f(x) ? x : null;
+	  }, null);
+	};
+	
+	var equalRecords = function equalRecords(o1, o2) {
+	  for (var key in o1) {
+	    if (o1[key] !== o2[key]) return false;
+	  }return true;
+	};
+	
+	/* React 12<= / >=13 compatible findDOMNode function. */
+	var supportsFindDOMNode = Number(_react2['default'].version.split('.')[1]) >= 13;
+	
+	var findDOMNode = function findDOMNode(component) {
+	  return supportsFindDOMNode ? _react2['default'].findDOMNode(component) : component.getDOMNode();
+	};
+	
+	var noop = function noop() {
+	  return undefined;
+	};
+	
+	var clientOnly = function clientOnly(f) {
+	  return _platform.isClient ? f : noop;
+	};
+	
+	exports.assign = assign;
+	exports.arrayify = arrayify;
+	exports.find = find;
+	exports.equalRecords = equalRecords;
+	exports.findDOMNode = findDOMNode;
+	exports.noop = noop;
+	exports.clientOnly = clientOnly;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var implementation = __webpack_require__(175);
 	
 	var assignHasPendingExceptions = function () {
 		if (!Object.assign || !Object.preventExtensions) {
@@ -30218,18 +30356,18 @@
 
 
 /***/ },
-/* 172 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	// modified from https://github.com/es-shims/es6-shim
-	var keys = __webpack_require__(173);
-	var bind = __webpack_require__(175);
+	var keys = __webpack_require__(176);
+	var bind = __webpack_require__(178);
 	var canBeObject = function (obj) {
 		return typeof obj !== 'undefined' && obj !== null;
 	};
-	var hasSymbols = __webpack_require__(176)();
+	var hasSymbols = __webpack_require__(179)();
 	var toObject = Object;
 	var push = bind.call(Function.call, Array.prototype.push);
 	var propIsEnumerable = bind.call(Function.call, Object.prototype.propertyIsEnumerable);
@@ -30258,7 +30396,7 @@
 
 
 /***/ },
-/* 173 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30267,7 +30405,7 @@
 	var has = Object.prototype.hasOwnProperty;
 	var toStr = Object.prototype.toString;
 	var slice = Array.prototype.slice;
-	var isArgs = __webpack_require__(174);
+	var isArgs = __webpack_require__(177);
 	var hasDontEnumBug = !({ 'toString': null }).propertyIsEnumerable('toString');
 	var hasProtoEnumBug = function () {}.propertyIsEnumerable('prototype');
 	var dontEnums = [
@@ -30386,7 +30524,7 @@
 
 
 /***/ },
-/* 174 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30409,7 +30547,7 @@
 
 
 /***/ },
-/* 175 */
+/* 178 */
 /***/ function(module, exports) {
 
 	var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
@@ -30463,12 +30601,12 @@
 
 
 /***/ },
-/* 176 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var keys = __webpack_require__(173);
+	var keys = __webpack_require__(176);
 	
 	module.exports = function hasSymbols() {
 		if (typeof Symbol !== 'function' || typeof Object.getOwnPropertySymbols !== 'function') { return false; }
@@ -30500,123 +30638,9 @@
 
 
 /***/ },
-/* 177 */
-/***/ function(module, exports) {
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports.on = on;
-	exports.off = off;
-	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || function (fn) {
-	  window.setTimeout(fn, 20);
-	};
-	var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.clearTimeout;
-	var isIE = navigator.userAgent.match(/Trident/);
-	var namespace = '__resizeDetector__';
-	
-	exports.addEventListener = on;
-	exports.removeEventListener = off;
-	
-	function on(el, fn) {
-	
-	  /* Window object natively publishes resize events. We handle it as a
-	  special case here so that users do not have to think about two APIs. */
-	
-	  if (el === window) {
-	    window.addEventListener('resize', fn);
-	    return;
-	  }
-	
-	  /* Not caching namespace read here beacuse not guaranteed that its available. */
-	
-	  if (!el[namespace]) initialize(el);
-	  el[namespace].listeners.push(fn);
-	}
-	
-	function off(el, fn) {
-	  if (el === window) {
-	    window.removeEventListener('resize', fn);
-	    return;
-	  }
-	  var detector = el[namespace];
-	  if (!detector) return;
-	  var i = detector.listeners.indexOf(fn);
-	  if (i !== -1) detector.listeners.splice(i, 1);
-	  if (!detector.listeners.length) uninitialize(el);
-	}
-	
-	function uninitialize(el) {
-	  el[namespace].destroy();
-	  el[namespace] = undefined;
-	}
-	
-	function initialize(el) {
-	  var detector = el[namespace] = {};
-	
-	  detector.listeners = [];
-	
-	  if (isIE) {
-	    /* We do not support ie8 and below (or ie9 in compat mode).
-	    Therefore there is no presence of `attachEvent` here. */
-	    el.addEventListener('onresize', onResize);
-	    detector.destroy = function () {
-	      el.removeEventListener('onresize', onResize);
-	    };
-	  } else {
-	    (function () {
-	      if (getComputedStyle(el).position === 'static') {
-	        detector.elWasStaticPosition = true;
-	        el.style.position = 'relative';
-	      }
-	      var objEl = createElementHack();
-	      objEl.onload = function () /* event */{
-	        this.contentDocument.defaultView.addEventListener('resize', onResize);
-	      };
-	      detector.destroy = function () {
-	        if (detector.elWasStaticPosition) el.style.position = '';
-	        // Event handlers will be automatically removed.
-	        // http://stackoverflow.com/questions/12528049/if-a-dom-element-is-removed-are-its-listeners-also-removed-from-memory
-	        el.removeChild(objEl);
-	      };
-	
-	      el.appendChild(objEl);
-	    })();
-	  }
-	
-	  function onResize(e) {
-	    /* Keep in mind e.target could be el OR objEl. In this current implementation we
-	    don't seem to need to know this but its important to not forget e.g. in some future refactoring
-	    scenario. */
-	    if (detector.resizeRAF) cancelAnimationFrame(detector.resizeRAF);
-	    detector.resizeRAF = requestAnimationFrame(function () {
-	      detector.listeners.forEach(function (fn) {
-	        fn(e);
-	      });
-	    });
-	  }
-	}
-	
-	function createElementHack() {
-	  var el = document.createElement('object');
-	  el.className = 'resize-sensor';
-	  el.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
-	  el.setAttribute('class', 'resize-sensor');
-	  el.type = 'text/html';
-	  el.data = 'about:blank';
-	  return el;
-	}
-
-/***/ },
-/* 178 */
-/***/ function(module, exports) {
-
-	/* Axes system. This allows us to at-will work in a different orientation
-	without having to manually keep track of knowing if we should be using
-	x or y positions. */
-	
 	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
@@ -30624,6 +30648,16 @@
 	});
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	var _platform = __webpack_require__(172);
+	
+	var _utils = __webpack_require__(173);
+	
+	/* Axes System
+	
+	This allows us to at-will work in a different orientation
+	without having to manually keep track of knowing if we should be using
+	x or y positions. */
 	
 	var axes = {
 	  row: {},
@@ -30655,8 +30689,7 @@
 	};
 	
 	var centerOfBounds = function centerOfBounds(flow, axis, bounds) {
-	  var props = axes[flow][axis];
-	  return bounds[props.start] + bounds[props.size] / 2;
+	  return bounds[axes[flow][axis].start] + bounds[axes[flow][axis].size] / 2;
 	};
 	
 	var centerOfBoundsFromBounds = function centerOfBoundsFromBounds(flow, axis, boundsTo, boundsFrom) {
@@ -30667,10 +30700,60 @@
 	  var axisProps = axes[flow][axis];
 	  return align === 'center' ? centerOfBounds(flow, axis, bounds) - centerOfSize(flow, axis, size) : align === 'end' ? bounds[axisProps.end] : align === 'start'
 	  /* DOM rendering unfolds leftward. Therefore if the slave is positioned before
-	  the master then the slave's position must in addition be pulled back
-	  by its [the slave's] own length. */
+	  the master then the slave`s position must in addition be pulled back
+	  by its [the slave`s] own length. */
 	  ? bounds[axisProps.start] - size[axisProps.size] : null;
 	};
+	
+	/* Element Layout Queries */
+	
+	var El = {};
+	
+	El.calcBounds = function (el) {
+	
+	  if (el === _platform.window) {
+	    return {
+	      x: 0,
+	      y: 0,
+	      x2: el.innerWidth,
+	      y2: el.innerHeight,
+	      w: el.innerWidth,
+	      h: el.innerHeight
+	    };
+	  }
+	
+	  var b = el.getBoundingClientRect();
+	
+	  return {
+	    x: b.left,
+	    y: b.top,
+	    x2: b.right,
+	    y2: b.bottom,
+	    w: b.right - b.left,
+	    h: b.bottom - b.top
+	  };
+	};
+	
+	El.calcSize = function (el) {
+	  return el === _platform.window ? { w: el.innerWidth, h: el.innerHeight } : { w: el.offsetWidth, h: el.offsetHeight };
+	};
+	
+	El.calcScrollSize = function (el) {
+	  return el === _platform.window ? {
+	    w: el.scrollX || el.pageXOffset,
+	    h: el.scrollY || el.pageYOffset
+	  } : { w: el.scrollLeft, h: el.scrollTop };
+	};
+	
+	/* Misc Utilities */
+	
+	var getPreferenceType = function getPreferenceType(preference) {
+	  return types.reduce(function (found, type) {
+	    return found ? found : type.values.indexOf(preference) !== -1 ? type.name : null;
+	  }, null);
+	};
+	
+	/* Dimension Fit Checks */
 	
 	var fitWithinChecker = function fitWithinChecker(dimension) {
 	  return function (domainSize, itemSize) {
@@ -30679,26 +30762,26 @@
 	};
 	
 	var doesWidthFitWithin = fitWithinChecker('w');
-	
 	var doesHeightFitWithin = fitWithinChecker('h');
 	
 	var doesFitWithin = function doesFitWithin(domainSize, itemSize) {
 	  return doesWidthFitWithin(domainSize, itemSize) && doesHeightFitWithin(domainSize, itemSize);
 	};
 	
-	var equalCoords = function equalCoords(c1, c2) {
-	  for (var key in c1) if (c1[key] !== c2[key]) return false;
-	  return true;
+	/* Errors */
+	
+	var createPreferenceError = function createPreferenceError(givenValue) {
+	  return new Error('The given layout placement of "' + givenValue + '" is not a valid choice. Valid choices are: ' + validTypeValues.join(' | ') + '.');
 	};
 	
-	/* Algorithm for picking the best fitting zone for popover. The current technique will
-	loop through all zones picking the last one that fits. If none fit the last one is selected.
-	TODO: In the case that none fit we should pick the least-not-fitting zone. */
+	/* Algorithm for picking the best fitting zone for popover. The current technique will loop through all zones picking the last one that fits. If
+	none fit the last one is selected.
+	
+	TODO In the case that none fit we should pick the least-not-fitting zone. */
 	
 	var pickZone = function pickZone(opts, frameBounds, targetBounds, size) {
-	  var t = targetBounds,
-	      f = frameBounds;
-	
+	  var t = targetBounds;
+	  var f = frameBounds;
 	  var zones = [{ side: 'start', standing: 'above', flow: 'column', order: -1, w: f.x2, h: t.y }, { side: 'end', standing: 'right', flow: 'row', order: 1, w: f.x2 - t.x2, h: f.y2 }, { side: 'end', standing: 'below', flow: 'column', order: 1, w: f.x2, h: f.y2 - t.y2 }, { side: 'start', standing: 'left', flow: 'row', order: -1, w: t.x, h: f.y2 }];
 	
 	  var availZones = zones.filter(function (zone) {
@@ -30715,7 +30798,7 @@
 	        return z[type] === opts.place;
 	      };
 	      return {
-	        v: find(finder, availZones) || find(finder, zones)
+	        v: (0, _utils.find)(finder, availZones) || (0, _utils.find)(finder, zones)
 	      };
 	    })();
 	
@@ -30744,22 +30827,7 @@
 	  return availZones.length ? availZones[0] : zones[0];
 	};
 	
-	var find = function find(f, xs) {
-	  return xs.reduce(function (b, x) {
-	    return b ? b : f(x) ? x : null;
-	  }, null);
-	};
-	
-	var createPreferenceError = function createPreferenceError(givenValue) {
-	  return new Error('The given layout placement of "' + givenValue + '" is not a valid choice. Valid choices are: ' + validTypeValues.join(' | ') + '.');
-	};
-	
-	var getPreferenceType = function getPreferenceType(preference) {
-	  return types.reduce(function (found, type) {
-	    if (found) return found;
-	    return ~type.values.indexOf(preference) ? type.name : null;
-	  }, null);
-	};
+	/* TODO Document this. */
 	
 	var calcRelPos = function calcRelPos(zone, masterBounds, slaveSize) {
 	  var _ref;
@@ -30778,46 +30846,6 @@
 	  return (_ref = {}, _defineProperty(_ref, main.start, mainStart), _defineProperty(_ref, 'mainLength', mainSize), _defineProperty(_ref, main.end, mainStart + mainSize), _defineProperty(_ref, cross.start, crossStart), _defineProperty(_ref, 'crossLength', crossSize), _defineProperty(_ref, cross.end, crossStart + crossSize), _ref);
 	};
 	
-	/* Element-based layout functions */
-	
-	var El = {};
-	
-	El.calcBounds = function (el) {
-	
-	  if (el === window) {
-	    return {
-	      x: 0,
-	      y: 0,
-	      x2: el.innerWidth,
-	      y2: el.innerHeight,
-	      w: el.innerWidth,
-	      h: el.innerHeight
-	    };
-	  }
-	
-	  var b = el.getBoundingClientRect();
-	
-	  return {
-	    x: b.left,
-	    y: b.top,
-	    x2: b.right,
-	    y2: b.bottom,
-	    w: b.right - b.left,
-	    h: b.bottom - b.top
-	  };
-	};
-	
-	El.calcSize = function (el) {
-	  return el === window ? { w: el.innerWidth, h: el.innerHeight } : { w: el.offsetWidth, h: el.offsetHeight };
-	};
-	
-	El.calcScrollSize = function (el) {
-	  return el === window ? {
-	    w: el.scrollX || el.pageXOffset,
-	    h: el.scrollY || el.pageYOffset
-	  } : { w: el.scrollLeft, h: el.scrollTop };
-	};
-	
 	exports.types = types;
 	exports.validTypeValues = validTypeValues;
 	exports.calcRelPos = calcRelPos;
@@ -30828,11 +30856,11 @@
 	exports.centerOfBounds = centerOfBounds;
 	exports.centerOfBoundsFromBounds = centerOfBoundsFromBounds;
 	exports.doesFitWithin = doesFitWithin;
-	exports.equalCoords = equalCoords;
+	exports.equalCoords = _utils.equalRecords;
 	exports.El = El;
 
 /***/ },
-/* 179 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30843,7 +30871,7 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var debounce = __webpack_require__(180);
+	var debounce = __webpack_require__(182);
 	
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -30934,7 +30962,7 @@
 
 
 /***/ },
-/* 180 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30945,7 +30973,7 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(181);
+	var getNative = __webpack_require__(183);
 	
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -31174,7 +31202,7 @@
 
 
 /***/ },
-/* 181 */
+/* 183 */
 /***/ function(module, exports) {
 
 	/**
@@ -31317,7 +31345,7 @@
 
 
 /***/ },
-/* 182 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
@@ -31328,7 +31356,7 @@
 	 * @type {{js: String, css: String}}
 	 * @api public
 	 */
-	exports.prefix = __webpack_require__(183)
+	exports.prefix = __webpack_require__(185)
 	
 	/**
 	 * Test if a property is supported, returns property with vendor
@@ -31338,7 +31366,7 @@
 	 * @return {String|Boolean}
 	 * @api public
 	 */
-	exports.supportedProperty = __webpack_require__(184)
+	exports.supportedProperty = __webpack_require__(186)
 	
 	/**
 	 * Returns prefixed value if needed. Returns `false` if value is not supported.
@@ -31348,11 +31376,11 @@
 	 * @return {String|Boolean}
 	 * @api public
 	 */
-	 exports.supportedValue = __webpack_require__(186)
+	 exports.supportedValue = __webpack_require__(188)
 
 
 /***/ },
-/* 183 */
+/* 185 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -31362,56 +31390,65 @@
 	 * Based on "transform" support test.
 	 */
 	
-	var jsCssMap = {
-	    Webkit: '-webkit-',
-	    Moz: '-moz-',
-	    // IE did it wrong again ...
-	    ms: '-ms-',
-	    O: '-o-'
-	}
+	exports.js = exports.css = ''
 	
-	var style = document.createElement('p').style
-	var testProp = 'Transform'
+	// We should not do anything if required serverside.
+	if (typeof document != 'undefined') {
+	    var jsCssMap = {
+	        Webkit: '-webkit-',
+	        Moz: '-moz-',
+	        // IE did it wrong again ...
+	        ms: '-ms-',
+	        O: '-o-'
+	    }
+	    var style = document.createElement('p').style
+	    var testProp = 'Transform'
 	
-	for (var js in jsCssMap) {
-	    if ((js + testProp) in style) {
-	        exports.js = js
-	        exports.css = jsCssMap[js]
-	        break
+	    for (var js in jsCssMap) {
+	        if ((js + testProp) in style) {
+	            exports.js = js
+	            exports.css = jsCssMap[js]
+	            break
+	        }
 	    }
 	}
 
 
 /***/ },
-/* 184 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var prefix = __webpack_require__(183)
-	var camelize = __webpack_require__(185)
+	var prefix = __webpack_require__(185)
+	var camelize = __webpack_require__(187)
 	
-	var el = document.createElement('p')
+	var el
+	var cache = {}
 	
-	/**
-	 * We test every property on vendor prefix requirement.
-	 * Once tested, result is cached. It gives us up to 70% perf boost.
-	 * http://jsperf.com/element-style-object-access-vs-plain-object
-	 *
-	 * Prefill cache with known css properties to reduce amount of
-	 * properties we need to feature test at runtime.
-	 * http://davidwalsh.name/vendor-prefix
-	 */
-	var cache = (function() {
-	    var computed = window.getComputedStyle(document.documentElement, '')
-	    var cache = {}
+	if (typeof document != 'undefined') {
+	    el = document.createElement('p')
 	
-	    for (var key in computed) {
-	        cache[computed[key]] = computed[key]
-	    }
+	    /**
+	     * We test every property on vendor prefix requirement.
+	     * Once tested, result is cached. It gives us up to 70% perf boost.
+	     * http://jsperf.com/element-style-object-access-vs-plain-object
+	     *
+	     * Prefill cache with known css properties to reduce amount of
+	     * properties we need to feature test at runtime.
+	     * http://davidwalsh.name/vendor-prefix
+	     */
+	    cache = (function() {
+	        var computed = window.getComputedStyle(document.documentElement, '')
+	        var cache = {}
 	
-	    return cache
-	}())
+	        for (var key in computed) {
+	            cache[computed[key]] = computed[key]
+	        }
+	
+	        return cache
+	    }())
+	}
 	
 	/**
 	 * Test if a property is supported, returns supported property with vendor
@@ -31442,7 +31479,7 @@
 
 
 /***/ },
-/* 185 */
+/* 187 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -31466,16 +31503,18 @@
 
 
 /***/ },
-/* 186 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var prefix = __webpack_require__(183)
+	var prefix = __webpack_require__(185)
 	
 	var cache = {}
 	
-	var el = document.createElement('p')
+	var el
+	
+	if (typeof document != 'undefined') el = document.createElement('p')
 	
 	/**
 	 * Returns prefixed value if needed. Returns `false` if value is not supported.
@@ -31514,17 +31553,130 @@
 
 
 /***/ },
-/* 187 */
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(10);
+	
+	var _utils = __webpack_require__(173);
+	
+	var _platform = __webpack_require__(172);
+	
+	var createElement = function createElement(x) {
+	  return _platform.isClient ? document.createElement(x) : _utils.noop;
+	};
+	
+	var bodyAppendElement = function bodyAppendElement(x) {
+	  return _platform.isClient ? document.body.appendChild(x) : _utils.noop;
+	};
+	
+	var bodyRemoveElement = function bodyRemoveElement(x) {
+	  return _platform.isClient ? document.body.removeChild(x) : _utils.noop;
+	};
+	
+	var ReactLayerMixin = function ReactLayerMixin() {
+	  return {
+	    componentWillMount: function componentWillMount() {
+	      this.targetBounds = null;
+	      /* Create a DOM node for mounting the React Layer. */
+	      this.layerContainerNode = createElement('div');
+	    },
+	    componentDidMount: function componentDidMount() {
+	      /* Mount the mount. */
+	      bodyAppendElement(this.layerContainerNode);
+	      this._layerRender();
+	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	      this._layerRender();
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	      this._layerUnrender();
+	      /* Unmount the mount. */
+	      bodyRemoveElement(this.layerContainerNode);
+	    },
+	    _layerRender: function _layerRender() {
+	      var layerReactEl = this.renderLayer();
+	      if (!layerReactEl) {
+	        this.layerReactComponent = null;
+	        (0, _react.render)(_react.DOM.noscript(), this.layerContainerNode);
+	      } else {
+	        this.layerReactComponent = (0, _react.render)(layerReactEl, this.layerContainerNode);
+	      }
+	    },
+	    _layerUnrender: function _layerUnrender() {
+	      if (this.layerWillUnmount) this.layerWillUnmount(this.layerContainerNode);
+	      (0, _react.unmountComponentAtNode)(this.layerContainerNode);
+	    }
+	  };
+	};
+	
+	// renderLayer() {
+	//   Must be implemented by consumer.
+	// }
+	exports['default'] = ReactLayerMixin;
+	module.exports = exports['default'];
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(10);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var PopoverTip = _react2['default'].createClass({
+	  name: 'tip',
+	  render: function render() {
+	    var direction = this.props.direction;
+	
+	    var size = this.props.size || 24;
+	    var isPortrait = direction === 'up' || direction === 'down';
+	    var mainLength = size;
+	    var crossLength = size * 2;
+	    var points = direction === 'up' ? '0,' + mainLength + ' ' + mainLength + ',0, ' + crossLength + ',' + mainLength : direction === 'down' ? '0,0 ' + mainLength + ',' + mainLength + ', ' + crossLength + ',0' : direction === 'left' ? mainLength + ',0 0,' + mainLength + ', ' + mainLength + ',' + crossLength : '0,0 ' + mainLength + ',' + mainLength + ', 0,' + crossLength;
+	    var props = {
+	      className: 'Popover-tip',
+	      width: isPortrait ? crossLength : mainLength,
+	      height: isPortrait ? mainLength : crossLength
+	    };
+	    var triangle = _react.DOM.svg(props, _react.DOM.polygon({
+	      className: 'Popover-tipShape',
+	      points: points
+	    }));
+	
+	    return triangle;
+	  }
+	});
+	
+	exports['default'] = PopoverTip;
+	module.exports = exports['default'];
+
+/***/ },
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var TappableMixin = __webpack_require__(188);
-	var PinchableMixin = __webpack_require__(189);
-	var getComponent = __webpack_require__(190);
-	var touchStyles = __webpack_require__(191);
+	var TappableMixin = __webpack_require__(192);
+	var PinchableMixin = __webpack_require__(193);
+	var getComponent = __webpack_require__(194);
+	var touchStyles = __webpack_require__(195);
 	
 	var Component = getComponent([TappableMixin, PinchableMixin]);
 	
@@ -31537,7 +31689,7 @@
 	});
 
 /***/ },
-/* 188 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31821,7 +31973,7 @@
 	module.exports = Mixin;
 
 /***/ },
-/* 189 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31932,7 +32084,7 @@
 	module.exports = Mixin;
 
 /***/ },
-/* 190 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31940,7 +32092,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var React = __webpack_require__(10);
-	var touchStyles = __webpack_require__(191);
+	var touchStyles = __webpack_require__(195);
 	
 	/**
 	 * Tappable Component
@@ -32003,7 +32155,7 @@
 	};
 
 /***/ },
-/* 191 */
+/* 195 */
 /***/ function(module, exports) {
 
 	'use strict';
