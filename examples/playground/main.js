@@ -1,4 +1,4 @@
-import './index.css'
+import './main.css'
 import Debug from 'debug'
 import R from 'ramda'
 import React, { DOM as E } from 'react'
@@ -83,12 +83,12 @@ const Demo = React.createClass({
     }
 
     const target = (
-        Draggable(draggableProps,
-          E.div(targetProps,
-            E.div(targetMoveProps, 'Move'),
-            Tappable(targetToggleProps, 'Toggle')
-          )
+      Draggable(draggableProps,
+        E.div(targetProps,
+          E.div(targetMoveProps, 'Move'),
+          Tappable(targetToggleProps, 'Toggle')
         )
+      )
     )
 
     const popoverProps = {
@@ -118,7 +118,7 @@ const Demo = React.createClass({
 
     const popover = Popover(popoverProps, target)
 
-    const app = E.div({}, controls, E.br(), popover)
+    const app = E.div({ id: 'app' }, controls, popover)
 
     return app
   }
