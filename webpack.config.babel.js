@@ -6,12 +6,13 @@ import Path from 'path'
 const path = Path.join.bind(null, __dirname)
 const outputDirName = `build`
 const outputDir = path(outputDirName)
-const indexEntry = [`./examples/basic/index.js`]
-const jsLoaders = [`babel`]
+
+
 
 export default {
   entry: {
-    index: indexEntry,
+    basic: `./examples/basic/index.js`,
+    multipleTriggers: `./examples/multiple-triggers/main.js`,
   },
   output: {
     path: outputDir,
@@ -20,7 +21,7 @@ export default {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: jsLoaders },
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
       { test: /\.css$/, exclude: /node_modules/, loaders: [ `style`, `css` ]},
     ],
   },
