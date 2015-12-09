@@ -46,7 +46,7 @@
 
 	'use strict';
 	
-	__webpack_require__(189);
+	__webpack_require__(1);
 	
 	var _ramda = __webpack_require__(5);
 	
@@ -64,9 +64,15 @@
 	
 	var _lib2 = _interopRequireDefault(_lib);
 	
+	var _classnames = __webpack_require__(188);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Popover = _react2.default.createFactory(_lib2.default);
+	var randomIntegerBetween = function randomIntegerBetween(from, to) {
+	  return Math.round(Math.random() * (to - from) + from);
+	};
 	
 	var Main = _react2.default.createClass({
 	  displayName: 'Main',
@@ -75,42 +81,52 @@
 	      isOpen: false
 	    };
 	  },
-	  render: function render() {
-	    return _react.DOM.div({
-	      id: 'app',
-	      children: [this.renderControls(), this.renderPopover()]
-	    });
-	  },
 	  toggle: function toggle() {
 	    this.setState({ isOpen: !this.state.isOpen });
 	  },
-	  renderControls: function renderControls() {
-	    var _this = this;
-	
-	    return _react.DOM.div({
-	      className: 'controls',
-	      children: _ramda2.default.map(function (n) {
-	        return _react.DOM.div({
-	          key: n,
-	          className: 'control',
-	          onMouseOver: function onMouseOver() {
-	            return _this.toggle();
-	          },
-	          children: _this.state.isOpen ? 'Close' : 'Open'
-	        });
-	      }, _ramda2.default.range(1, 5))
-	    });
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { id: 'app' },
+	      this.renderPopover()
+	    );
 	  },
 	  renderPopover: function renderPopover() {
-	    return _react.DOM.div({
-	      className: 'body',
-	      children: Popover({
-	        isOpen: this.state.isOpen,
-	        body: 'Body',
-	        children: _react.DOM.span({
-	          children: 'Hello World'
-	        })
-	      })
+	    var isOpen = this.state.isOpen;
+	
+	    return _react2.default.createElement(
+	      _lib2.default,
+	      { isOpen: isOpen, body: 'Boo!' },
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: (0, _classnames2.default)('target', { isOpen: isOpen }),
+	          onClick: this.toggle },
+	        this.renderPerson(isOpen)
+	      )
+	    );
+	  },
+	  renderPerson: function renderPerson(isScared) {
+	    return isScared ? ';o' : [_react2.default.createElement(
+	      'span',
+	      { key: 'taps', className: 'Taps' },
+	      this.renderTaps()
+	    ), _react2.default.createElement(
+	      'span',
+	      { key: 'person' },
+	      'Who\'s there?'
+	    )];
+	  },
+	  renderTaps: function renderTaps() {
+	    return _ramda2.default.range(0, randomIntegerBetween(1, 6)).map(function (i) {
+	      var style = {
+	        transform: 'rotate(' + randomIntegerBetween(-90, 90) + 'deg)'
+	      };
+	      return _react2.default.createElement(
+	        'em',
+	        { key: i, className: 'Tap', style: style },
+	        'Tap'
+	      );
 	    });
 	  }
 	});
@@ -120,8 +136,46 @@
 	window.Main = Main;
 
 /***/ },
-/* 1 */,
-/* 2 */,
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(2);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/cssnext-loader/index.js!./main.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/cssnext-loader/index.js!./main.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "/* Boilerplate */\n\nhtml {\n  font-family: monospace;\n  font-size: 16px;\n  height: 100%;\n  background: hsl(0, 0%, 95%);\n}\n\nbody {\n  height: 100%;\n  padding: 0;\n  margin: 0;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n#main {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n#app {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n\n/* Popover */\n\n.Popover-body {\n  display: -webkit-inline-box;\n  display: -webkit-inline-flex;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding: 32px 64px;\n  padding: 2rem 4rem;\n  background: hsl(0, 0%, 27%);\n  color: white;\n  border-radius: 0.3rem;\n}\n\n.Popover-tipShape {\n  fill: hsl(0, 0%, 27%)\n}\n\n\n\n/* Boilerplate */\n\n#app {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n\n\n/* Popover */\n\n.Popover-body {\n  padding: 128px;\n  padding: 8rem;\n}\n\n\n\n/* Target */\n\n.target {\n  cursor: pointer;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.target:not(.isOpen) {\n  opacity: 0.5;\n}\n\n.target.isOpen {\n  color: hsla(354, 91%, 60%, 1);\n}\n\n\n\n.Taps {\n  margin-right: 48px;\n  margin-right: 3rem;\n}\n\n.Tap {\n  display: inline-block;\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
 /* 3 */
 /***/ function(module, exports) {
 
@@ -30548,46 +30602,59 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 188 */,
-/* 189 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2015 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
 	
-	// load the styles
-	var content = __webpack_require__(190);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/cssnext-loader/index.js!./main.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/cssnext-loader/index.js!./main.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = '';
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes += ' ' + arg;
+				} else if (Array.isArray(arg)) {
+					classes += ' ' + classNames.apply(null, arg);
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes += ' ' + key;
+						}
+					}
+				}
+			}
+	
+			return classes.substr(1);
 		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 190 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
 	
-	
-	// module
-	exports.push([module.id, "/* Boilerplate */\n\nhtml {\n  font-family: monospace;\n  font-size: 16px;\n  height: 100%;\n  background: hsl(0, 0%, 95%);\n}\n\nbody {\n  height: 100%;\n  padding: 0;\n  margin: 0;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n#main {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n#app {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n\n/* Popover */\n\n.Popover-body {\n  display: -webkit-inline-box;\n  display: -webkit-inline-flex;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding: 32px 64px;\n  padding: 2rem 4rem;\n  background: hsl(0, 0%, 27%);\n  color: white;\n  border-radius: 0.3rem;\n}\n\n.Popover-tipShape {\n  fill: hsl(0, 0%, 27%)\n}\n\n\n\n/* Boiler Plate */\n\n#app {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\n\n\n/* Menu/Toolbar */\n\n.controls {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 20%;\n  margin: 7% 0 4% 10%;\n}\n\n.control {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 32px;\n  padding: 2rem;\n  margin-bottom: 8px;\n  margin-bottom: 0.5rem;\n  cursor: default;\n  background: white;\n  color: hsla(0,0%,0%,0.3);\n  -webkit-transition: background-color 0.05s;\n          transition: background-color 0.05s;\n}\n\n.control:last-child {\n  margin-bottom: none;\n}\n\n.control:hover {\n  color: hsla(0,0%,0%,0.5);\n  background-color: hsla(0,0%,100%,0.4);\n}\n\n\n\n/* Main View */\n\n.body {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n", ""]);
-	
-	// exports
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
 
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=multipleTriggers.js.map
+//# sourceMappingURL=jsx.js.map
