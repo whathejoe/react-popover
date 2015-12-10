@@ -46,7 +46,7 @@
 
 	'use strict';
 	
-	__webpack_require__(191);
+	__webpack_require__(189);
 	
 	var _debug = __webpack_require__(165);
 	
@@ -64,7 +64,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactDraggable = __webpack_require__(193);
+	var _reactDraggable = __webpack_require__(191);
 	
 	var _reactDraggable2 = _interopRequireDefault(_reactDraggable);
 	
@@ -72,7 +72,7 @@
 	
 	var _lib2 = _interopRequireDefault(_lib);
 	
-	var _reactTappable = __webpack_require__(194);
+	var _reactTappable = __webpack_require__(192);
 	
 	var _reactTappable2 = _interopRequireDefault(_reactTappable);
 	
@@ -30601,15 +30601,13 @@
 
 /***/ },
 /* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(192);
+	var content = __webpack_require__(190);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -30629,7 +30627,7 @@
 	}
 
 /***/ },
-/* 192 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(3)();
@@ -30643,7 +30641,7 @@
 
 
 /***/ },
-/* 193 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -32024,17 +32022,17 @@
 	//# sourceMappingURL=react-draggable.js.map
 
 /***/ },
-/* 194 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var TappableMixin = __webpack_require__(195);
-	var PinchableMixin = __webpack_require__(196);
-	var getComponent = __webpack_require__(197);
-	var touchStyles = __webpack_require__(198);
+	var TappableMixin = __webpack_require__(193);
+	var PinchableMixin = __webpack_require__(194);
+	var getComponent = __webpack_require__(195);
+	var touchStyles = __webpack_require__(196);
 	
 	var Component = getComponent([TappableMixin, PinchableMixin]);
 	
@@ -32047,7 +32045,7 @@
 	});
 
 /***/ },
-/* 195 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32334,7 +32332,7 @@
 	module.exports = Mixin;
 
 /***/ },
-/* 196 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32445,7 +32443,7 @@
 	module.exports = Mixin;
 
 /***/ },
-/* 197 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32453,7 +32451,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var React = __webpack_require__(6);
-	var touchStyles = __webpack_require__(198);
+	var touchStyles = __webpack_require__(196);
 	
 	/**
 	 * Tappable Component
@@ -32516,7 +32514,7 @@
 	};
 
 /***/ },
-/* 198 */
+/* 196 */
 /***/ function(module, exports) {
 
 	'use strict';

@@ -46,7 +46,7 @@
 
 	'use strict';
 	
-	__webpack_require__(189);
+	__webpack_require__(197);
 	
 	var _ramda = __webpack_require__(5);
 	
@@ -68,48 +68,47 @@
 	
 	var Popover = _react2.default.createFactory(_lib2.default);
 	
-	var Main = _react2.default.createClass({
-	  displayName: 'Main',
+	var Row = _react2.default.createFactory(_react2.default.createClass({
+	  displayName: 'row',
 	  getInitialState: function getInitialState() {
 	    return {
 	      isOpen: false
 	    };
 	  },
+	  toggle: function toggle() {
+	    var toState = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	
+	    this.setState({ isOpen: toState === null ? !this.state.isOpen : toState });
+	  },
+	  render: function render() {
+	    var _this = this;
+	
+	    var isOpen = this.state.isOpen;
+	
+	    return Popover({
+	      isOpen: isOpen,
+	      body: '!',
+	      children: _react.DOM.div({
+	        className: 'Row',
+	        onMouseOver: function onMouseOver() {
+	          return _this.toggle(true);
+	        },
+	        onMouseOut: function onMouseOut() {
+	          return _this.toggle(false);
+	        },
+	        children: this.props.children
+	      })
+	    });
+	  }
+	}));
+	
+	var Main = _react2.default.createClass({
+	  displayName: 'Main',
 	  render: function render() {
 	    return _react.DOM.div({
 	      id: 'app',
-	      children: [this.renderControls(), this.renderPopover()]
-	    });
-	  },
-	  toggle: function toggle() {
-	    this.setState({ isOpen: !this.state.isOpen });
-	  },
-	  renderControls: function renderControls() {
-	    var _this = this;
-	
-	    return _react.DOM.div({
-	      className: 'controls',
-	      children: _ramda2.default.map(function (n) {
-	        return _react.DOM.div({
-	          key: n,
-	          className: 'control',
-	          onMouseOver: function onMouseOver() {
-	            return _this.toggle();
-	          },
-	          children: _this.state.isOpen ? 'Close' : 'Open'
-	        });
-	      }, _ramda2.default.range(1, 5))
-	    });
-	  },
-	  renderPopover: function renderPopover() {
-	    return _react.DOM.div({
-	      className: 'body',
-	      children: Popover({
-	        isOpen: this.state.isOpen,
-	        body: 'Body',
-	        children: _react.DOM.span({
-	          children: 'Hello World'
-	        })
+	      children: _ramda2.default.range(0, 51).map(function (i) {
+	        return Row({}, i);
 	      })
 	    });
 	  }
@@ -30549,13 +30548,21 @@
 
 /***/ },
 /* 188 */,
-/* 189 */
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(190);
+	var content = __webpack_require__(198);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -30575,7 +30582,7 @@
 	}
 
 /***/ },
-/* 190 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(3)();
@@ -30583,11 +30590,11 @@
 	
 	
 	// module
-	exports.push([module.id, "/* Boilerplate */\n\nhtml {\n  font-family: monospace;\n  font-size: 16px;\n  height: 100%;\n  background: hsl(0, 0%, 95%);\n}\n\nbody {\n  height: 100%;\n  padding: 0;\n  margin: 0;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n#main {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n#app {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n\n/* Popover */\n\n.Popover-body {\n  display: -webkit-inline-box;\n  display: -webkit-inline-flex;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding: 32px 64px;\n  padding: 2rem 4rem;\n  background: hsl(0, 0%, 27%);\n  color: white;\n  border-radius: 0.3rem;\n}\n\n.Popover-tipShape {\n  fill: hsl(0, 0%, 27%)\n}\n\n\n\n/* Boiler Plate */\n\n#app {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\n\n\n/* Menu/Toolbar */\n\n.controls {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 20%;\n  margin: 7% 0 4% 10%;\n}\n\n.control {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 32px;\n  padding: 2rem;\n  margin-bottom: 8px;\n  margin-bottom: 0.5rem;\n  cursor: default;\n  background: white;\n  color: hsla(0,0%,0%,0.3);\n  -webkit-transition: background-color 0.05s;\n          transition: background-color 0.05s;\n}\n\n.control:last-child {\n  margin-bottom: none;\n}\n\n.control:hover {\n  color: hsla(0,0%,0%,0.5);\n  background-color: hsla(0,0%,100%,0.4);\n}\n\n\n\n/* Main View */\n\n.body {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n", ""]);
+	exports.push([module.id, "/* Boilerplate */\n\nhtml {\n  font-family: monospace;\n  font-size: 16px;\n  height: 100%;\n  background: hsl(0, 0%, 95%);\n}\n\nbody {\n  height: 100%;\n  padding: 0;\n  margin: 0;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n\n#main {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n#app {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n\n\n/* Popover */\n\n.Popover-body {\n  display: -webkit-inline-box;\n  display: -webkit-inline-flex;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding: 32px 64px;\n  padding: 2rem 4rem;\n  background: hsl(0, 0%, 27%);\n  color: white;\n  border-radius: 0.3rem;\n}\n\n.Popover-tipShape {\n  fill: hsl(0, 0%, 27%)\n}\n\n\n\n/* Boiler Plate */\n\n#app {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n\n\n.Row {\n  width: 30%;\n  background-color: white;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin-bottom: 16px;\n  margin-bottom: 1rem;\n  padding: 16px;\n  padding: 1rem;\n  color: hsla(0, 0%, 60%, 1);\n}\n\n.Row:hover {\n  color: hsla(0, 0%, 20%, 1);\n}\n\n/* Menu/Toolbar */\n\n.controls {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 20%;\n  margin: 7% 0 4% 10%;\n}\n\n.control {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 32px;\n  padding: 2rem;\n  margin-bottom: 8px;\n  margin-bottom: 0.5rem;\n  cursor: default;\n  background: white;\n  color: hsla(0,0%,0%,0.3);\n  -webkit-transition: background-color 0.05s;\n          transition: background-color 0.05s;\n}\n\n.control:last-child {\n  margin-bottom: none;\n}\n\n.control:hover {\n  color: hsla(0,0%,0%,0.5);\n  background-color: hsla(0,0%,100%,0.4);\n}\n\n\n\n/* Main View */\n\n.body {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n}\n", ""]);
 	
 	// exports
 
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=multipleTriggers.js.map
+//# sourceMappingURL=rows.js.map
