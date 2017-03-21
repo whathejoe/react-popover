@@ -4,7 +4,8 @@
 
 # react-popover
 
-A specification backed popover for react. <<demos, See demos>>.
+image:https://travis-ci.org/littlebits/react-popover.svg?branch=master["Build Status", link="https://travis-ci.org/littlebits/react-popover"]
+
 
 toc::[]
 
@@ -21,7 +22,7 @@ npm install --save react-popover
 ## Demos
 
 * link:https://littlebits.github.io/react-popover/build/playground.html[Playground]
-* link:https://littlebits.github.io/react-popover/build/rows.html[Multiple Triggers]
+* link:https://littlebits.github.io/react-popover/build/rows.html[Rows]
 * link:https://littlebits.github.io/react-popover/build/jsx.html[Using JSX]
 
 To run demos locally execute `npm start`. If you do not see logs in the console refresh the browser once (https://github.com/littlebits/react-popover/issues/35).
@@ -61,14 +62,21 @@ Like `preferPlace` except that the given place is a ***requirement***. The resol
 
 ---
 
-##### `onOuterAction :: Function`
+##### `onOuterAction :: (Event) -> Void`
 A callback function executed every time the user does an action (`mousedown` or `touchstart`) outside the DOM tree of both `Popover` and `Target`. A canonical use-case is to automatically close the Popover on any external user action.
-* Plus support for standard props...: `className`, `style`
+
 
 ---
 
 ##### `refreshIntervalMs :: Number | Falsey`
 The polling speed (AKA time between each poll) in milliseconds for checking if a layout refresh is required. This polling is required because it is the only robust way to track the position of a target in the DOM. Defaults to `200`. Set to a falsey value to disable.
+
+---
+
+##### Standard
+
+* Properties like `className` and `style`.
+
 
 ---
 
