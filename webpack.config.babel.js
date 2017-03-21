@@ -15,7 +15,8 @@ export default {
   },
   output: {
     path: outputDir,
-    filename: "[name].js"
+    publicPath: `/react-popover/${outputDirName}/`,
+    filename: "[name].js",
   },
   module: {
     loaders: [
@@ -24,8 +25,5 @@ export default {
     ],
   },
   devtool: "source-map",
-  devServer: {
-    contentBase: outputDir,
-  },
   plugins: [Bootstrap({})],
 }
