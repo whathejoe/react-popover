@@ -343,6 +343,7 @@ var Popover = (0, _react.createClass)({
     }, this.props.enterExitTransitionDurationMs);
   },
   animateEnter: function animateEnter() {
+    if (!this.props.enterExitTransitionDurationMs) return;
     /* Prepare `entering` style so that we can then animate it toward `entered`. */
 
     this.containerEl.style.transform = flowToPopoverTranslations[this.zone.flow] + "(" + this.zone.order * 50 + "px)";
@@ -356,7 +357,7 @@ var Popover = (0, _react.createClass)({
     this.tipEl.style.transition = "transform 150ms ease-in";
     this.tipEl.style[jsprefix("Transition")] = cssprefix("transform") + " 150ms ease-in";
     this.containerEl.style.transitionProperty = "top, left, opacity, transform";
-    this.containerEl.style.transitionDuration = this.props.enterExitTransitionDurationMs + "ms";
+    this.containerEl.style.transitionDuration = "500ms";
     this.containerEl.style.transitionTimingFunction = "cubic-bezier(0.230, 1.000, 0.320, 1.000)";
     this.containerEl.style.opacity = "1";
     this.containerEl.style.transform = "translateY(0)";
